@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Book
+<!-- Create the partial view -->
+<div class="card card-outline-primary m-1 p-1">
+    <!--I added this image which stretches across each card-->
+    <img class="card-img-bottom" style="height:60px"src="https://media.istockphoto.com/id/475120238/vector/vector-of-library-book-shelf-background-vector-flat-illustrations.jpg?s=612x612&w=0&k=20&c=mdREmR7tcGeEJlqj02DDGnvxxH18Y-frVYvDN54HlTU=" />
+
+    <!-- I add the text-uppercase to be able to make the titles of all books uppercase -->
+    <div class="bg-faded p-1 text-uppercase">
+        <h4>
+            @Model.Title
+            <span class="bg-primary badge rounded-pill" style="float:right">
+                <small>@Model.Price.ToString("c")</small>
+            </span>
+        </h4>
+    </div>
+    <div class="card-text p-1">Author: @Model.Author</div>
+    <div class="card-text p-1">Publisher: @Model.Publisher</div>
+    <div class="card-text p-1">ISBN: @Model.Isbn</div>
+    <div class="card-text p-1">Classification: @Model.Classification</div>
+    <div class="card-text p-1">Category: @Model.Category</div>
+    <div class="card-text p-1">Page Count: @Model.PageCount</div>
+
+    <!-- add a form -->
+    <form method="post" asp-page="/Shop">
+
+        <input type="hidden" asp-for="@Model.BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-end">Add to Cart</button>
+        </span>
+    </form>
+</div>
